@@ -24,7 +24,16 @@ let nextId = 3;
 
 
 // ---- Issue #8 (PATCH /tasks/:id/toggle) ----
+app.patch('/tasks/:id/toggle', (req, res) => {
+  const task = tasks.find(t => t.id === Number(req.params.id));
 
+  if (!task) {
+    return res.status(404).json({ error: 'Task not found' });
+  }
+
+  task.done = !task.done;
+  res.json(task);
+});
 
 // ---- Issue #9 (GET /health) ----
 
