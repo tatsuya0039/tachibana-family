@@ -12,7 +12,20 @@ let nextId = 3;
 
 
 // ---- Issue #4 (POST /tasks) ----
+app.post('/tasks', (req, res) => {
+  const { title } = req.body;
 
+  const newTask = {
+    id: nextId,
+    title: title,
+    done: false
+  };
+
+  tasks.push(newTask);
+  nextId++;
+
+  res.status(201).json(newTask);
+});
 
 // ---- Issue #5 (GET /tasks/:id) ----
 
